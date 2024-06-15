@@ -2,6 +2,13 @@ import pandas as pd
 import numpy as np
 import time
 
+# Gen 1: 600 runs / second          initial
+# Gen 2: 1000 runs / second         dont read file every time
+# Gen 3: 1070 runs / second         better get trait frequencies
+# Gen 4: 16_000 runs / second       dict instead of df
+# Gen 5: 320_000 runs / second      dict instead of df
+
+
 def get_traits_frequencies(units, unit_trait_dict):
     trait_frequencies = {}
     units = set(units)
@@ -43,6 +50,7 @@ def create_unit_trait_dict():
    
     return unit_trait_dict
 
+
 def create_trait_threshold_dict():
     trait_df = pd.read_csv("traits.csv")
 
@@ -52,17 +60,10 @@ def create_trait_threshold_dict():
    
     return threshold_dict
 
+
 def main():
-    # Gen 1: 600 runs / second          initial
-    # Gen 2: 1000 runs / second         dont read file every time
-    # Gen 3: 1070 runs / second         better get trait frequencies
-    # Gen 4: 16_000 runs / second       dict instead of df
-    # Gen 5: 320_000 runs / second      dict instead of df
-
-
     unit_trait_dict = create_unit_trait_dict()
     trait_threshold_dict = create_trait_threshold_dict()
-
 
     units = ["Zoe", "Zyra", "Riven", "Morgana", "Shen", "Aatrox", "Illaoi", "Kayn", "Caitlyn"]
 
@@ -78,7 +79,6 @@ def main():
 
     t = time.perf_counter()-t
     print("Runs per scond:", runs/t)
-
 
 
 if __name__ == "__main__":
