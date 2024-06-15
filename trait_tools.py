@@ -19,13 +19,13 @@ def get_traits_frequencies(units:List[str], unit_trait_dict:Dict) -> Dict:
     for unit in units:
         traits = unit_trait_dict[unit]
         for trait in traits:
+            if pd.isnull(trait):
+                continue
             if trait in trait_frequencies:
                 trait_frequencies[trait] += 1
             else:
                 trait_frequencies[trait] = 1
    
-    del trait_frequencies[np.NaN]
-
     return trait_frequencies
 
 
